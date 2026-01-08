@@ -23,7 +23,7 @@ class Honeypot extends Tags
     {
         if (! empty($this->context->get('spatieHoneypot'))) {
             $data = $this->context->get('spatieHoneypot');
-            if (! empty($this->params->get('is-precognion'))) {
+            if (! empty($this->params->get('is-precognition'))) {
                 $data['scope'] = 'form';
             }
             if ($this->context->get('js_driver') === 'honeypot') {
