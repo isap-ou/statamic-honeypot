@@ -11,6 +11,22 @@ This addon does **not** replace or modify Spatie’s package. It connects Statam
 
 ---
 
+## ⚠️ Known issue in Statamic ≤ 5.70
+
+Statamic versions **up to and including 5.70** contain a bug that prevents the honeypot JavaScript driver from working correctly with Alpine-powered forms.
+
+If you need a working Alpine.js integration, apply the upstream Statamic patch from PR **#13463**.
+
+Patch URL:
+
+```
+https://patch-diff.githubusercontent.com/raw/statamic/cms/pull/13463.patch
+```
+
+After applying the patch, use `js="honeypot"` on your Statamic form as documented below.
+
+---
+
 ## What this addon does
 
 This addon makes it possible to use `spatie/laravel-honeypot` inside Statamic without having to wire it up manually in Laravel.

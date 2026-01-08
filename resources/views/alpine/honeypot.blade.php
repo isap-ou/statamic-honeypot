@@ -2,6 +2,7 @@
     <div
             id="{{ $nameFieldName }}_wrap"
             @if($withCsp) @cspNonce @endif
+            style="display: none"
             aria-hidden="true"
     >
         <input
