@@ -3,4 +3,3 @@ phpunit.xml               export-ignore
 pint.json               export-ignore
 .github               export-ignore
 tests               export-ignore
-README.md                  export-ignore
