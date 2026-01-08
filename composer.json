@@ -1,0 +1,54 @@
+{
+  "name": "isapp/statamic-honeypot",
+  "description": "A lightweight, no-CAPTCHA spam protection module that silently blocks bots without disrupting real users.",
+  "license": "proprietary",
+  "support": {
+    "issues": "https://github.com/isap-ou/laravel-imagetools/issues",
+    "source": "https://github.com/isap-ou/laravel-imagetools"
+  },
+  "suggest": {
+    "spatie/image-optimizer": "Lossless optimization of output images (requires system binaries like jpegoptim, pngquant, gifsicle, svgo)."
+  },
+  "authors": [
+    {
+      "name": "Andrii Trush",
+      "email": "andrii.trush@isapp.be"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Isapp\\Honeypot\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Isapp\\Honeypot\\Tests\\": "tests"
+    }
+  },
+  "require": {
+    "statamic/cms": "^5.0",
+    "spatie/laravel-honeypot": "^4"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^9.0",
+    "laravel/pint": "^1"
+  },
+  "config": {
+    "allow-plugins": {
+      "pixelfear/composer-dist-plugin": true
+    }
+  },
+  "extra": {
+    "statamic": {
+      "name": "Statamic Honeypot",
+      "description": "Statamic Honeypot addon"
+    },
+    "laravel": {
+      "providers": [
+        "Isapp\\Honeypot\\ServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
