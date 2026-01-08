@@ -118,6 +118,16 @@ Example:
 {{ /form:contact }}
 ```
 
+#### Precognition
+
+If you are using Statamic **Precognition** with Antlers forms, you must explicitly enable it on the honeypot tag:
+
+```antlers
+{{ isapp:honeypot is-precognition="true" }}
+```
+
+This is required due to how Statamic's Precognition form driver works.
+
 ### Blade
 
 #### Simple Blade forms (Spatie)
@@ -152,6 +162,16 @@ Important: in this Statamic + Alpine scenario, use `<s:isapp:honeypot />` (this 
     ...
 </s:form:contact>
 ```
+
+##### Precognition
+
+When using Statamic **Precognition** in Blade templates, you must pass the `is-precognition` flag to the honeypot component:
+
+```blade
+<s:isapp:honeypot is-precognition />
+```
+
+This is required due to limitations in Statamic's Precognition form driver.
 
 ---
 

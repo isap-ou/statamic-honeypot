@@ -20,19 +20,17 @@ class Honeypot extends Alpine
     {
         $this->honeypot = app()->make(\Spatie\Honeypot\Honeypot::class)->toArray();
 
-        //        $form->honeypot($this->honeypot);
-
         parent::__construct($form, $options, $params);
     }
 
     public function addToFormData($data): array
     {
-        $data['honeypotData'] = [...$this->honeypot, 'scope' => $this->scope];
+        $data['spatieHoneypot'] = [...$this->honeypot, 'scope' => $this->scope];
 
         return $data;
     }
 
-    public function addToFormAttributes()
+    public function addToFormAttributes(): array
     {
         $extraData = $this->params->pull('x-data', []);
 

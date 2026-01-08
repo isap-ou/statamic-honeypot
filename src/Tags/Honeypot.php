@@ -21,8 +21,11 @@ class Honeypot extends Tags
      */
     public function honeypot(): array|string
     {
-        if (! empty($this->context->get('honeypotData'))) {
-            $data = $this->context->get('honeypotData');
+        if (! empty($this->context->get('spatieHoneypot'))) {
+            $data = $this->context->get('spatieHoneypot');
+            if (! empty($this->params->get('is-precognion'))) {
+                $data['scope'] = 'form';
+            }
             if ($this->context->get('js_driver') === 'honeypot') {
                 return view('isapp::alpine.honeypot', $data)->render();
             }
