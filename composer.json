@@ -24,11 +24,11 @@
   },
   "require": {
     "php": "^8.2",
-    "statamic/cms": "^5.0",
+    "statamic/cms": "^6.0",
     "spatie/laravel-honeypot": "^4"
   },
   "require-dev": {
-    "orchestra/testbench": "^9.0",
+    "orchestra/testbench": "^10",
     "laravel/pint": "^1"
   },
   "config": {
@@ -48,5 +48,5 @@
     }
   },
   "prefer-stable": true,
-  "version": "1.0.2"
+  "minimum-stability": "dev"
 }

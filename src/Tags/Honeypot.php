@@ -19,14 +19,16 @@ class Honeypot extends Tags
      *
      * @throws \Throwable
      */
-    public function honeypot(): array|string
+    public function honeypot()
     {
         if (! empty($this->context->get('spatieHoneypot'))) {
             $data = $this->context->get('spatieHoneypot');
-            if (! empty($this->params->get('is-precognition'))) {
-                $data['scope'] = 'form';
-            }
-            if ($this->context->get('js_driver') === 'honeypot') {
+            if ($this->context->get('js_driver') === 'honeypot' || $this->context->get('js_driver') === 'honeypot_precognition') {
+                if ($this->context->get('js_driver') === 'honeypot_precognition') {
+                    $data['scope'] = 'form';
+                    $data['isPrecognition'] = true;
+                }
+
                 return view('isapp::alpine.honeypot', $data)->render();
             }
 

@@ -20,6 +20,7 @@ class ServiceProvider extends AddonServiceProvider
 
     protected $formJsDrivers = [
         JsDrivers\Honeypot::class,
+        JsDrivers\HoneypotPrecognition::class,
     ];
 
     public function bootAddon()

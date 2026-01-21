@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version (e.g. 1.4.2 or v1.4.2)"
+        description: "Version (e.g. 1.4.2)"
         required: true
         type: string
 
@@ -22,38 +22,12 @@ jobs:
       - name: Normalize version
         id: v
         run: |
-          RAW="${{ github.event.inputs.version }}"
-          # strip leading v if present
-          VERSION="${RAW#v}"
+          VERSION="${{ github.event.inputs.version }}"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
-
-      - name: Update composer.json
-        run: |
-          V="${{ steps.v.outputs.version }}"
-          test -f composer.json
-          TMP=$(mktemp)
-          jq --arg v "$V" 'if has("version") then .version=$v else .+{version:$v} end' composer.json > "$TMP" && mv "$TMP" composer.json
-          cat composer.json
-
-      - name: Commit version bump
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add composer.json
-          if git diff --cached --quiet; then
-            echo "No changes"; exit 0
-          fi
-          git commit -m "chore: set composer.json version to ${{ steps.v.outputs.version }}"
-
-      - name: Push commit
-        run: |
-          # push back to the default branch (detect HEAD branch)
-          TARGET=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
-          git push origin HEAD:"$TARGET"
 
       - name: Create tag
         run: |
@@ -69,5 +43,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.v.outputs.tag }}
-          name: Release ${{ steps.v.outputs.tag }}
+          name: Release ${{ steps.v.outputs.version }}
           generate_release_notes: true

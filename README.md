@@ -3,27 +3,15 @@
 > ⚠️ **Important — Commercial addon**  
 > This addon is paid software. You may use it for free during development, but you must purchase a valid license from the [Statamic Marketplace](https://statamic.com/marketplace) before deploying it to a production environment.
 
+> 📌 **Statamic version**  
+> This documentation is for **Statamic 6**.  
+> For **Statamic 5**, see the [5.x branch](../../tree/5.x).
+
 ## Introduction
 
 **Honeypot Spam Protection** is a commercial Statamic addon that provides a native Statamic integration layer for the open-source package [`spatie/laravel-honeypot`](https://github.com/spatie/laravel-honeypot).
 
 This addon does **not** replace or modify Spatie’s package. It connects Statamic’s form system to the existing honeypot and time-based spam protection logic provided by Spatie and exposes it in a way that fits naturally into Statamic projects.
-
----
-
-## ⚠️ Known issue in Statamic ≤ 5.70
-
-Statamic versions **up to and including 5.70** contain a bug that prevents the honeypot JavaScript driver from working correctly with Alpine-powered forms.
-
-If you need a working Alpine.js integration, apply the upstream Statamic patch from PR **#13463**.
-
-Patch URL:
-
-```
-https://patch-diff.githubusercontent.com/raw/statamic/cms/pull/13463.patch
-```
-
-After applying the patch, use `js="honeypot"` on your Statamic form as documented below.
 
 ---
 
@@ -62,6 +50,18 @@ This Statamic addon:
 - Registers Spatie's honeypot middleware in the application's web middleware group by default
 
 No changes are made to Spatie’s code, and no part of their package is forked or modified.
+
+---
+
+## Upgrade guide (Statamic 5 → 6)
+
+If you are upgrading from Statamic 5 to Statamic 6, note the following changes in this addon:
+
+- **Alpine.js integration:** no change — keep using `js="honeypot"`.
+- **Precognition:** update your forms to use `js="honeypot_precognition"`.
+- If you previously used `is-precognition="true"` (Antlers) or `is-precognition` (Blade), remove it — it is not required in Statamic 6.
+
+If you are staying on Statamic 5, use the documentation on the [5.x branch](../../tree/5.x).
 
 ---
 
@@ -120,13 +120,13 @@ Example:
 
 #### Precognition
 
-If you are using Statamic **Precognition** with Antlers forms, you must explicitly enable it on the honeypot tag:
+If you are using Statamic **Precognition** with Antlers forms, use `js="honeypot_precognition"` on the form tag:
 
 ```antlers
-{{ isapp:honeypot is-precognition="true" }}
+{{ form:contact js="honeypot_precognition" }}
+    {{ isapp:honeypot }}
+{{ /form:contact }}
 ```
-
-This is required due to how Statamic's Precognition form driver works.
 
 ### Blade
 
@@ -165,13 +165,14 @@ Important: in this Statamic + Alpine scenario, use `<s:isapp:honeypot />` (this 
 
 ##### Precognition
 
-When using Statamic **Precognition** in Blade templates, you must pass the `is-precognition` flag to the honeypot component:
+When using Statamic **Precognition** in Blade templates, use `js="honeypot_precognition"` on the form tag:
 
 ```blade
-<s:isapp:honeypot is-precognition />
+<s:form:contact js="honeypot_precognition">
+    <s:isapp:honeypot />
+    ...
+</s:form:contact>
 ```
-
-This is required due to limitations in Statamic's Precognition form driver.
 
 ---
 
